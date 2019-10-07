@@ -1,0 +1,4 @@
+This is a GET API program or app that uses the National Park Service website.
+The user enters a two letter State into the query box to search for parks in a region, and sets a maximum amount of returned search items.
+The returned results displayed on the screen include the Full Name of the park, the description of the park, as well as the Website URL address for the park.
+Each time the user enters a new search (and presses the submit button), the screen will display results for the new search.
