@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,32 +8,40 @@
     <link rel="stylesheet" href="index.css">
 
 </head>
+
 <body>
-    <div>
-        <h1>
-            To Find Events in your Area by Date Range
-        </h1>
+   
+        <div>
+            <h1>
+                To Find Events in your Area by Date Range
+            </h1>
 
-    </div>
+        </div>
+
+
+
+        <div>
+            <form id="form1">
+
+            </form>
+
+        </div>
+
+        <div id="top">
     
-    
-
-    <div>
-        <form id="form1">
-
-        </form>
-
+                <ul id="events" class="hidden"></ul>
+        <div id="map" class="hidden"></div>
+        <div id="right-panel"></div>
+         
     </div>
-
-    <div id="map" class="hidden"></div>
+    </div>
     <div id="floating-panel"></div>
-    <div id="right-panel"></div>
-    <div id="map2"></div>
-    <div id="events" class="hidden"></div>
+    
+   
 
     <div>
         <h2 id="errod">
-            
+
         </h2>
     </div>
     <ul class="results">
@@ -40,8 +49,9 @@
     </ul>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBssP3Kjt5eSXYxMti1CH9lxZh8Me7S7uY&callback=initMap">
-    </script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBssP3Kjt5eSXYxMti1CH9lxZh8Me7S7uY&callback=initMap">
+        </script>
     <script src="index.js"></script>
 </body>
+
 </html>

@@ -1,9 +1,43 @@
+h1 {
+  background-color: slateblue;
+}
+
+#form1 {
+  background-color: slateblue;
+}
+
+
+
+#top {
+  margin-top: 0;
+  height: 700 px;
+  width: 100%;
+  float: top;
+  display: inline-flex;
+  flex-direction: row;
+  
+}
+
+
 #map {
-    height: 300px;
+    height: 700px;
     width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+
   }
+
+#events {
+    width: 20%;
+    height: 700px;
+    overflow: scroll;
+    
+
+}
+
+li {
+  border: solid black 1px;
+  padding: 10px;
+  list-style-type:decimal;
+}
 
   .hidden {
     display: none;
@@ -19,7 +53,6 @@
   
   
   #floating-panel {
-    position: absolute;
     top: 10px;
     left: 25%;
     z-index: 5;
@@ -34,27 +67,22 @@
   #right-panel {
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
-    padding-left: 10px;
-
+    background-color: white;
+    width: 30%;
+    overflow: scroll;
+    height: 700px;
   }
 
   #right-panel select, #right-panel input {
     font-size: 15px;
   }
 
-  #right-panel select {
-    width: 100%;
-  }
+
 
   #right-panel i {
     font-size: 12px;
   }
-  #right-panel {
-    height: 100%;
-    float: right;
-    width: 390px;
-    overflow: auto;
-  }
+ 
   #map2 {
     margin-right: 400px;
   }

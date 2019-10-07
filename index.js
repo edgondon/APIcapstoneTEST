@@ -52,9 +52,10 @@ function initMap(json) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             let pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
+                lat: 55.9444958,
+                lng: -3.259452
             };
+            console.log(pos);
             longlat.push(pos);    
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
@@ -76,14 +77,10 @@ let addressGo = [];
 function showEvents(json) {
     let nums = Math.min(json.page.size, json.page.totalElements);
     for(var i=0; i<nums; i++) {
-      let output = "";
-      if(json._embedded.events[i]._embedded.venues[0].state === undefined) {
-        output = "no state";
-      }
-      else {
+      let output = [];
+      if(json._embedded.events[i]._embedded.venues[0].country.countryCode === "US") {
         output = json._embedded.events[i]._embedded.venues[0].state.stateCode;
-          }
-      $("#events").append(`<p>${checkText(json._embedded.events[i].name)}</p>
+        $("#events").append(`<li><p>${checkText(json._embedded.events[i].name)}</p>
             <p>Date of Event: ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
             <p>Distance in Miles: ${checkValue(json._embedded.events[i].distance)}</p>
             <p>Address: ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
@@ -93,8 +90,25 @@ function showEvents(json) {
                 Submit 
             </button> 
             </form>
-            <a href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a>
+            <a href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a></li>
             `);
+      }
+      else {
+        output.push(`${json._embedded.events[i]._embedded.venues[0].location.latitude},${json._embedded.events[i]._embedded.venues[0].location.longitude}`);
+        $("#events").append(`<li><p>${checkText(json._embedded.events[i].name)}</p>
+            <p>Date of Event: ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
+            <p>Distance in Miles: ${checkValue(json._embedded.events[i].distance)}</p>
+            <p>Address: ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
+            <form id="form2">
+            <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
+            <button type="button" for="startaddress" onclick="displayRadioValue()"> 
+                Submit 
+            </button> 
+            </form>
+            <a href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a></li>
+            `);
+          }
+      
       
     }
   }
@@ -195,6 +209,7 @@ function initMap2() {
 
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     let start = `${longlat[0].lat},${longlat[0].lng}`;
+    console.log(`${start}`);
     console.log(`${addressGo}`);
     let end = `${addressGo}`;
     directionsService.route({
@@ -217,9 +232,8 @@ function displayRadioValue() {
     let ele = $('.helper:checked').val(); 
     addressGo.push(ele);    
     console.log(ele);
-    $('#events').addClass('hidden');
     initMap2();
-
+    $('.helper:checked').prop('checked', false);
     } 
 
 
