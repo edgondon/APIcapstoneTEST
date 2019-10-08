@@ -75,46 +75,50 @@ let longlat = [];
 let addressGo = [];
 
 function showEvents(json) {
-    let nums = Math.min(json.page.size, json.page.totalElements);
-    for(var i=0; i<nums; i++) {
-      let output = [];
-      if(json._embedded.events[i]._embedded.venues[0].country.countryCode === "US") {
-        output = json._embedded.events[i]._embedded.venues[0].state.stateCode;
-        $("#events").append(`<li><p>${checkText(json._embedded.events[i].name)}</p>
-            <p>Date of Event: ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
-            <p>Distance in Miles: ${checkValue(json._embedded.events[i].distance)}</p>
-            <p>Address: ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
-            <form id="form2">
-            <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(json._embedded.events[i]._embedded.venues[0].state.stateCode)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
-            <button type="button" for="startaddress" onclick="displayRadioValue()"> 
-                Submit 
-            </button> 
-            </form>
-            <a href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a></li>
-            `);
-      }
-      else {
-        output.push(`${json._embedded.events[i]._embedded.venues[0].location.latitude},${json._embedded.events[i]._embedded.venues[0].location.longitude}`);
-        $("#events").append(`<li><p>${checkText(json._embedded.events[i].name)}</p>
-            <p>Date of Event: ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
-            <p>Distance in Miles: ${checkValue(json._embedded.events[i].distance)}</p>
-            <p>Address: ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
-            <form id="form2">
-            <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
-            <button type="button" for="startaddress" onclick="displayRadioValue()"> 
-                Submit 
-            </button> 
-            </form>
-            <a href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a></li>
-            `);
-          }
-      
-      
+  let nums = Math.min(json.page.size, json.page.totalElements);
+  for(var i=0; i<nums; i++) {
+    let output = [];
+    if(json._embedded.events[i]._embedded.venues[0].country.countryCode === "US") {
+      output = json._embedded.events[i]._embedded.venues[0].state.stateCode;
+      $("#events").append(`<li><b>${checkText(json._embedded.events[i].name)}</b>
+          <p><u>Venue:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].name)}</p>
+          <p><u>Date of Event:</u> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
+          <p><u>Distance in Miles:</u> ${checkValue(json._embedded.events[i].distance)}</p>
+          <p><u>Address:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
+          <form id="form2">
+          <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(json._embedded.events[i]._embedded.venues[0].state.stateCode)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
+          <button type="button" for="startaddress" onclick="displayRadioValue()"> 
+              Submit 
+          </button> 
+          </form>
+          <div class="blunk">
+          <a class="blink" href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a>
+          </div>
+          </li>
+          `);
     }
+    else {
+      output.push(`${json._embedded.events[i]._embedded.venues[0].location.latitude},${json._embedded.events[i]._embedded.venues[0].location.longitude}`);
+      $("#events").append(`<li><b>${checkText(json._embedded.events[i].name)}</b>
+      <p><u>Venue:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].name)}</p>
+          <p><u>Date of Event:</u> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
+          <p><u>Distance in Miles:</u> ${checkValue(json._embedded.events[i].distance)}</p>
+          <p><u>Address:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
+          <form id="form2">
+          <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
+          <button type="button" for="startaddress" onclick="displayRadioValue()"> 
+              Submit 
+          </button> 
+          </form>
+          <div class="blunk">
+          <a id="blink" href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a>
+          </div>
+          </li>
+          `);
+        }
+
   }
-
-
-
+}
 
 
 

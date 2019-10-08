@@ -1,12 +1,26 @@
 h1 {
   background-color: slateblue;
+  text-align: center;
 }
 
 #form1 {
   background-color: slateblue;
 }
 
+#form2 {
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: lightskyblue;
+}
 
+.blink {
+  background-color: yellow;
+}
+
+.blunk {
+  text-align: center;
+  width: 100%;
+}
 
 #top {
   margin-top: 0;
